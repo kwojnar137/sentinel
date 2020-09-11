@@ -1,15 +1,40 @@
 import React, { useState } from "react";
 import GearboxPath from "./GearboxPath";
 
-function isOnPath(x, y) {}
+function between(x, y, xMin, xMax, yMin, yMax, offset) {
+  return (
+    x >= xMin - offset &&
+    x <= xMax + offset &&
+    y >= yMin - offset &&
+    y <= yMax + offset
+  );
+}
 
-function GearShiftKnob({ isOnPath }) {
+function isOnPath(x, y, stack, border) {
+  const offset = 5;
+  console.log(x);
+  console.log(y);
+  if (between(x, y, 48, 153.5, 100, 100, offset)) {
+    const relativeToMean = y > 100 ? "upper" : "lower";
+    return { allowed: true, border: "vertical", newStack: relativeToMean };
+  }
+  return { allowed: false, border: border, newStack: stack };
+}
+
+function GearShiftKnob() {
+  const [stack, setStack] = useState(null);
+  const [border, setBorder] = useState("vertical");
+
   const [position, setPosition] = useState({
     x: 100,
     y: 100,
     active: false,
     offset: {},
   });
+
+  const isOnMap = isOnPath(position.x, position.y, stack, border);
+
+  console.log(isOnMap.newStack);
 
   const handlePointerDown = (e) => {
     const el = e.target;
@@ -31,16 +56,38 @@ function GearShiftKnob({ isOnPath }) {
     const bbox = e.target.getBoundingClientRect();
     const x = e.clientX - bbox.left;
     const y = e.clientY - bbox.top;
-    // const onPath = isOnPath(x, y)
-    console.log(isOnPath);
-    if (position.active && isOnPath) {
+    // console.log(x);
+    // console.log(y);
+
+    if (position.active && isOnMap.allowed === true) {
+      setStack(isOnMap.newStack);
       setPosition({
         ...position,
         x: position.x - (position.offset.x - x),
         y: position.y - (position.offset.y - y),
       });
     }
+
+    if (position.active && isOnMap.allowed === false) {
+      if (border === "vertical") {
+        if (stack === "lower") {
+          console.log("accident");
+          setPosition({
+            ...position,
+            x: position.x - (position.offset.x - x),
+          });
+        }
+        if (stack === "upper") {
+          console.log("accident");
+          setPosition({
+            ...position,
+            x: position.x - (position.offset.x - x),
+          });
+        }
+      }
+    }
   };
+
   const handlePointerUp = (e) => {
     setPosition({
       ...position,
@@ -62,7 +109,6 @@ function GearShiftKnob({ isOnPath }) {
 }
 
 const Gearbox = () => {
-  const [isOnPath, setIsOnPath] = useState(false);
   return (
     <svg
       viewBox="0 0 200 200"
@@ -70,8 +116,8 @@ const Gearbox = () => {
       height="200"
       style={{ backgroundColor: "#1f2269" }}
     >
-      <GearboxPath setIsOnPath={setIsOnPath} />
-      <GearShiftKnob isOnPath={isOnPath} />
+      <GearboxPath />
+      <GearShiftKnob />
       {/* <Circle /> */}
     </svg>
   );

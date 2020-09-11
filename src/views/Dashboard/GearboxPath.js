@@ -1,49 +1,43 @@
 import React from "react";
 
-function GearboxPath({ setIsOnPath }) {
+function GearboxPath() {
   return (
     <>
       <g transform="translate(48 48)">
+        {/* 1 - 2 gear line */}
         <line
-          id="line1"
+          id="gearLine1to2"
           y2="104"
           fill="none"
           stroke="#707070"
           strokeWidth="6"
-          // onPointerOver={() => console.log("i'm on")}
-          // onPointerOut={() => console.log("i'm out")}
-          onPointerOver={() => setIsOnPath(true)}
-          onPointerOut={() => setIsOnPath(false)}
         />
+        {/* cross line */}
         <line
-          id="line2"
+          id="crossLine"
           x2="105"
           transform="translate(0 52)"
           fill="none"
           stroke="#707070"
           strokeWidth="6"
-          onPointerOver={() => setIsOnPath(true)}
-          onPointerOut={() => setIsOnPath(false)}
         />
+        {/* 5 - 6 gear line */}
         <line
-          id="line3"
+          id="gearLine5to6"
           y2="104"
           transform="translate(105.5 0.5)"
           fill="none"
           stroke="#707070"
           strokeWidth="6"
-          onPointerOver={() => setIsOnPath(true)}
-          onPointerOut={() => setIsOnPath(false)}
         />
+        {/* 3 - 4 gear line */}
         <line
-          id="line4"
+          id="gearLine3to4"
           y2="104"
           transform="translate(52.5 0.5)"
           fill="none"
           stroke="#707070"
           strokeWidth="6"
-          onPointerOver={() => setIsOnPath(true)}
-          onPointerOut={() => setIsOnPath(false)}
         />
       </g>
     </>
