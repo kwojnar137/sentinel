@@ -1,5 +1,26 @@
 import React, { useState } from "react";
 import GearboxPath from "./GearboxPath";
+import GearPort from "./GearPort";
+
+function findPort(x, y) {
+  const rangeFromPort = 10;
+  const portsCoords = [
+    { x: 48, y: 48 },
+    { x: 48, y: 152 },
+    { x: 100.5, y: 48 },
+    { x: 100.5, y: 152 },
+    { x: 153.5, y: 48 },
+    { x: 153.5, y: 152 },
+  ];
+  const nearest = portsCoords.map((port, id) => {
+    const deltaX = Math.abs(port.x - x);
+    const deltaY = Math.abs(port.y - y);
+    if (deltaX < rangeFromPort && deltaY < rangeFromPort) {
+      return { x: port.x, y: port.y, portId: id };
+    } else return null;
+  });
+  return nearest;
+}
 
 function between(x, y, xMin, xMax, yMin, yMax, offset) {
   return (
@@ -10,21 +31,7 @@ function between(x, y, xMin, xMax, yMin, yMax, offset) {
   );
 }
 
-function isOnPath(x, y, stack, border) {
-  const offset = 5;
-  console.log(x);
-  console.log(y);
-  if (between(x, y, 48, 153.5, 100, 100, offset)) {
-    const relativeToMean = y > 100 ? "upper" : "lower";
-    return { allowed: true, border: "vertical", newStack: relativeToMean };
-  }
-  return { allowed: false, border: border, newStack: stack };
-}
-
-function GearShiftKnob() {
-  const [stack, setStack] = useState(null);
-  const [border, setBorder] = useState("vertical");
-
+function GearShiftKnob({ setGear }) {
   const [position, setPosition] = useState({
     x: 100,
     y: 100,
@@ -32,15 +39,12 @@ function GearShiftKnob() {
     offset: {},
   });
 
-  const isOnMap = isOnPath(position.x, position.y, stack, border);
-
-  console.log(isOnMap.newStack);
-
   const handlePointerDown = (e) => {
     const el = e.target;
     const bbox = e.target.getBoundingClientRect();
     const x = e.clientX - bbox.left;
     const y = e.clientY - bbox.top;
+
     el.setPointerCapture(e.pointerId);
     setPosition({
       ...position,
@@ -56,43 +60,93 @@ function GearShiftKnob() {
     const bbox = e.target.getBoundingClientRect();
     const x = e.clientX - bbox.left;
     const y = e.clientY - bbox.top;
-    // console.log(x);
-    // console.log(y);
+    const offset2 = 20;
 
-    if (position.active && isOnMap.allowed === true) {
-      setStack(isOnMap.newStack);
-      setPosition({
-        ...position,
-        x: position.x - (position.offset.x - x),
-        y: position.y - (position.offset.y - y),
-      });
-    }
-
-    if (position.active && isOnMap.allowed === false) {
-      if (border === "vertical") {
-        if (stack === "lower") {
-          console.log("accident");
-          setPosition({
-            ...position,
-            x: position.x - (position.offset.x - x),
-          });
-        }
-        if (stack === "upper") {
-          console.log("accident");
-          setPosition({
-            ...position,
-            x: position.x - (position.offset.x - x),
-          });
-        }
+    if (position.active) {
+      if (between(position.x, position.y, 48, 153.5, 100, 100, offset2)) {
+        setPosition({
+          ...position,
+          x: position.x - (position.offset.x - x),
+          y: 100,
+        });
+      }
+      if (between(position.x, position.y, 48, 48, 48, 152, offset2)) {
+        setPosition({
+          ...position,
+          x: 48,
+          y: position.y - (position.offset.y - y),
+        });
+      }
+      if (between(position.x, position.y, 100.5, 100.5, 48, 152, offset2)) {
+        setPosition({
+          ...position,
+          x: 100.5,
+          y: position.y - (position.offset.y - y),
+        });
+      }
+      if (between(position.x, position.y, 153.5, 153.5, 48, 152, offset2)) {
+        setPosition({
+          ...position,
+          x: 153.5,
+          y: position.y - (position.offset.y - y),
+        });
+      }
+      if (
+        between(position.x, position.y, 48, 152.5, 100, 100, offset2) &&
+        between(position.x, position.y, 48, 48, 48, 152, offset2)
+      ) {
+        setPosition({
+          ...position,
+          x: position.x - (position.offset.x - x),
+          y: position.y - (position.offset.y - y),
+        });
+      }
+      if (
+        between(position.x, position.y, 48, 152.5, 100, 100, offset2) &&
+        between(position.x, position.y, 100.5, 100.5, 48, 152, offset2)
+      ) {
+        setPosition({
+          ...position,
+          x: position.x - (position.offset.x - x),
+          y: position.y - (position.offset.y - y),
+        });
+      }
+      if (
+        between(position.x, position.y, 48, 152.5, 100, 100, offset2) &&
+        between(position.x, position.y, 153.5, 153.5, 48, 152, offset2)
+      ) {
+        setPosition({
+          ...position,
+          x: position.x - (position.offset.x - x),
+          y: position.y - (position.offset.y - y),
+        });
       }
     }
   };
 
   const handlePointerUp = (e) => {
-    setPosition({
-      ...position,
-      active: false,
+    const nearestGearPort = findPort(position.x, position.y);
+    // console.log(nearestGearPort);
+    const nearestGearPortFiltered = nearestGearPort.filter((port) => {
+      return port !== null;
     });
+    if (nearestGearPortFiltered.length !== 0) {
+      const { x, y, portId } = nearestGearPortFiltered[0];
+      setPosition({
+        ...position,
+        x: x,
+        y: y,
+        active: false,
+      });
+      setGear(portId + 1);
+    } else {
+      setPosition({
+        ...position,
+        x: 100,
+        y: 100,
+        active: false,
+      });
+    }
   };
 
   return (
@@ -103,12 +157,12 @@ function GearShiftKnob() {
       onPointerDown={handlePointerDown}
       onPointerUp={handlePointerUp}
       onPointerMove={handlePointerMove}
-      fill={position.active ? "blue" : "black"}
+      fill={position.active ? "blue" : "#7d6060"}
     />
   );
 }
 
-const Gearbox = () => {
+const Gearbox = ({ setGear }) => {
   return (
     <svg
       viewBox="0 0 200 200"
@@ -117,7 +171,14 @@ const Gearbox = () => {
       style={{ backgroundColor: "#1f2269" }}
     >
       <GearboxPath />
-      <GearShiftKnob />
+      <GearPort x={48} y={48} active={false} />
+      <GearPort x={48} y={152} active={false} />
+      <GearPort x={100.5} y={48} active={false} />
+      <GearPort x={100.5} y={152} active={false} />
+      <GearPort x={153.5} y={48} active={false} />
+      <GearPort x={153.5} y={152} active={false} />
+      <GearShiftKnob setGear={setGear} />
+
       {/* <Circle /> */}
     </svg>
   );

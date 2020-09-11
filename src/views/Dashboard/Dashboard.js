@@ -84,7 +84,7 @@ const Dashboard = () => {
         </div>
         <div className="gearbox">
           <h2>Gearbox</h2>
-          <Gearbox />
+          <Gearbox setGear={setGear} />
         </div>
       </div>
     </Layout>
