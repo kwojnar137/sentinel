@@ -5,6 +5,7 @@ import Layout from "../../Layout/Layout";
 import Speedometer from "./Speedometer";
 import Tachometer from "./Tachometer";
 import InfoArea from "./InfoArea";
+import Gearbox from "./Gearbox";
 
 import "./dashboard.scss";
 
@@ -83,6 +84,7 @@ const Dashboard = () => {
         </div>
         <div className="gearbox">
           <h2>Gearbox</h2>
+          <Gearbox />
         </div>
       </div>
     </Layout>
