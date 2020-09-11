@@ -3,3 +3,25 @@
   display: flex;
   justify-content: center;
 }
+
+.control {
+  color: #7d6060;
+}
+
+.controlGui {
+  display: flex;
+  margin-bottom: 10px;
+  color: #7d6060;
+  .accelerator {
+    padding: 10px;
+  }
+  .break {
+    padding: 10px;
+  }
+  .clutch {
+    padding: 10px;
+  }
+  .gearbox {
+    padding: 10px;
+  }
+}
