@@ -126,7 +126,6 @@ function GearShiftKnob({ setGear }) {
 
   const handlePointerUp = (e) => {
     const nearestGearPort = findPort(position.x, position.y);
-    // console.log(nearestGearPort);
     const nearestGearPortFiltered = nearestGearPort.filter((port) => {
       return port !== null;
     });
@@ -140,6 +139,7 @@ function GearShiftKnob({ setGear }) {
       });
       setGear(portId + 1);
     } else {
+      setGear(0);
       setPosition({
         ...position,
         x: 100,
@@ -178,8 +178,6 @@ const Gearbox = ({ setGear }) => {
       <GearPort x={153.5} y={48} active={false} />
       <GearPort x={153.5} y={152} active={false} />
       <GearShiftKnob setGear={setGear} />
-
-      {/* <Circle /> */}
     </svg>
   );
 };

@@ -6,6 +6,10 @@ import Speedometer from "./Speedometer";
 import Tachometer from "./Tachometer";
 import InfoArea from "./InfoArea";
 import Gearbox from "./Gearbox";
+import Accelerator from "./Accelerator";
+import Break from "./Break";
+import Clutch from "./Clutch";
+import Pedal from "../../components/Pedal";
 
 import "./dashboard.scss";
 
@@ -16,6 +20,10 @@ const Dashboard = () => {
   const [range, setRange] = useState(230);
   const [temp, setTemp] = useState(20);
   const [fuel, setFuel] = useState(80);
+  const [breakPosition, setBreakPosition] = useState(0);
+  const [clutchPosition, setClutchPosition] = useState(0);
+  const [acceleration, setAcceleration] = useState(0);
+
   const date = new Date();
 
   return (
@@ -73,14 +81,36 @@ const Dashboard = () => {
         />
       </div>
       <div className="controlGui">
-        <div className="accelerator">
-          <h2>Accelerator</h2>
+        <div className="clutch">
+          <h2>Clutch</h2>
+          <Pedal
+            responsible={clutchPosition}
+            setResponsible={setClutchPosition}
+            step={20}
+            upKey={90}
+            downKey={65}
+          />
         </div>
         <div className="break">
           <h2>Break</h2>
+          <Pedal
+            responsible={breakPosition}
+            setResponsible={setBreakPosition}
+            step={10}
+            upKey={88}
+            downKey={83}
+          />
         </div>
-        <div className="clutch">
-          <h2>Clutch</h2>
+
+        <div className="accelerator">
+          <h2>Accelerator</h2>
+          <Pedal
+            responsible={acceleration}
+            setResponsible={setAcceleration}
+            step={4}
+            upKey={67}
+            downKey={68}
+          />
         </div>
         <div className="gearbox">
           <h2>Gearbox</h2>

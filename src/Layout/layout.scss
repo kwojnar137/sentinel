@@ -1,14 +1,13 @@
-body{
+body {
   margin: 0;
   padding: 0;
   // background-color: #7D6060;
   // background-color: #171043;
   background-color: #000230;
-
 }
 
-.container{
-  .header{
+.container {
+  .header {
     display: flex;
     justify-content: space-between;
     max-width: 850px;
@@ -18,34 +17,31 @@ body{
     padding: 10px 0px;
     background-color: #000230;
     // background-color: #171043;
-    
+
     border-radius: 20px;
     border-style: solid;
     border-width: 2px;
     color: #7d6060;
 
-    .logo{
+    .logo {
       padding: 10px 50px;
       display: flex;
       align-items: center;
-      .projectName{
+      .projectName {
         font-size: 2rem;
         padding: 0px 5px;
       }
     }
-    .links{
+    .links {
       display: flex;
     }
   }
-  .content{
+  .content {
     max-width: 1200px;
     margin-top: 20px;
     margin-left: auto;
     margin-right: auto;
- 
   }
-  .footer{
-
+  .footer {
   }
-  
 }
