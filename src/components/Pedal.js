@@ -1,21 +1,18 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useEffect } from "react";
 
 function Pedal({ responsible, setResponsible, step, upKey, downKey }) {
-  const keyFunction = useCallback(
-    (event) => {
-      if (event.keyCode === downKey) {
-        if (responsible >= step) {
-          setResponsible(responsible - step);
-        }
+  const keyFunction = (event) => {
+    if (event.keyCode === downKey) {
+      if (responsible >= step) {
+        setResponsible(responsible - step);
       }
-      if (event.keyCode === upKey) {
-        if (responsible <= 100 - step) {
-          setResponsible(responsible + step);
-        }
+    }
+    if (event.keyCode === upKey) {
+      if (responsible <= 100 - step) {
+        setResponsible(responsible + step);
       }
-    },
-    [responsible]
-  );
+    }
+  };
 
   useEffect(() => {
     document.addEventListener("keydown", keyFunction, false);

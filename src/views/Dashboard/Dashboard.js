@@ -6,11 +6,7 @@ import Speedometer from "./Speedometer";
 import Tachometer from "./Tachometer";
 import InfoArea from "./InfoArea";
 import Gearbox from "./Gearbox";
-import Accelerator from "./Accelerator";
-import Break from "./Break";
-import Clutch from "./Clutch";
 import Pedal from "../../components/Pedal";
-
 import "./dashboard.scss";
 
 const Dashboard = () => {
