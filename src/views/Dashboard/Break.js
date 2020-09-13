@@ -6,20 +6,19 @@ function Break() {
   const upKey = 88;
   const downKey = 83;
 
-  const keyFunction = (event) => {
-    if (event.keyCode === downKey) {
-      if (breakPosition >= step) {
-        setBreakPosition(breakPosition - step);
-      }
-    }
-    if (event.keyCode === upKey) {
-      if (breakPosition <= 100 - step) {
-        setBreakPosition(breakPosition + step);
-      }
-    }
-  };
-
   useEffect(() => {
+    const keyFunction = (event) => {
+      if (event.keyCode === downKey) {
+        if (breakPosition >= step) {
+          setBreakPosition(breakPosition - step);
+        }
+      }
+      if (event.keyCode === upKey) {
+        if (breakPosition <= 100 - step) {
+          setBreakPosition(breakPosition + step);
+        }
+      }
+    };
     document.addEventListener("keydown", keyFunction, false);
     return () => {
       document.removeEventListener("keydown", keyFunction, false);

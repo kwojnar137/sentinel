@@ -6,20 +6,20 @@ function Clutch() {
   const upKey = 90;
   const downKey = 65;
 
-  const keyFunction = (event) => {
-    if (event.keyCode === downKey) {
-      if (clutch >= step) {
-        setClutch(clutch - step);
-      }
-    }
-    if (event.keyCode === upKey) {
-      if (clutch <= 100 - step) {
-        setClutch(clutch + step);
-      }
-    }
-  };
-
   useEffect(() => {
+    const keyFunction = (event) => {
+      if (event.keyCode === downKey) {
+        if (clutch >= step) {
+          setClutch(clutch - step);
+        }
+      }
+      if (event.keyCode === upKey) {
+        if (clutch <= 100 - step) {
+          setClutch(clutch + step);
+        }
+      }
+    };
+
     document.addEventListener("keydown", keyFunction, false);
     return () => {
       document.removeEventListener("keydown", keyFunction, false);

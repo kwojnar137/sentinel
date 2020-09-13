@@ -6,20 +6,19 @@ function Accelerator() {
   const upKey = 67;
   const downKey = 68;
 
-  const keyFunction = (event) => {
-    if (event.keyCode === downKey) {
-      if (acceleration >= step) {
-        setAcceleration(acceleration - step);
-      }
-    }
-    if (event.keyCode === upKey) {
-      if (acceleration <= 100 - step) {
-        setAcceleration(acceleration + step);
-      }
-    }
-  };
-
   useEffect(() => {
+    const keyFunction = (event) => {
+      if (event.keyCode === downKey) {
+        if (acceleration >= step) {
+          setAcceleration(acceleration - step);
+        }
+      }
+      if (event.keyCode === upKey) {
+        if (acceleration <= 100 - step) {
+          setAcceleration(acceleration + step);
+        }
+      }
+    };
     document.addEventListener("keydown", keyFunction, false);
     return () => {
       document.removeEventListener("keydown", keyFunction, false);
