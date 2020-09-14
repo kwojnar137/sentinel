@@ -3,14 +3,14 @@ import { BrowserRouter as Router } from "react-router-dom";
 import Routes from "./Routes";
 
 function App() {
-  const [tick, setTick] = useState(0);
+  // const [tick, setTick] = useState(0);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setTick((tick) => !tick);
-    }, 1000);
-    return () => clearInterval(interval);
-  }, []);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setTick((tick) => !tick);
+  //   }, 33);
+  //   return () => clearInterval(interval);
+  // }, []);
 
   // console.log(tick);
 

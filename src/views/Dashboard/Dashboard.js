@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Layout from "../../Layout/Layout";
 // import { ReactComponent as DashboardVector } from "../../media/svg/Dashboard.svg";
 // import Speedometer from "../../media/svg/Speedometer";
@@ -21,6 +22,7 @@ const Dashboard = () => {
   const [range, setRange] = useState(230);
   const [temp, setTemp] = useState(20);
   const [fuel, setFuel] = useState(80);
+  const acceleration = useSelector((state) => state.acceleration);
   // const [breakPosition, setBreakPosition] = useState(0);
   // const [clutchPosition, setClutchPosition] = useState(0);
   // const [acceleration, setAcceleration] = useState(0);
@@ -115,6 +117,7 @@ const Dashboard = () => {
             upKey={67}
             downKey={68}
           /> */}
+          <h3>{acceleration}</h3>
         </div>
         <div className="gearbox">
           <h2>Gearbox</h2>
