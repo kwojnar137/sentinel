@@ -35,6 +35,7 @@ function between(x, y, xMin, xMax, yMin, yMax, offset) {
 
 function GearShiftKnob() {
   const dispatch = useDispatch();
+  const clutching = useSelector((state) => state.clutching);
 
   const [position, setPosition] = useState({
     x: 100,
@@ -141,7 +142,17 @@ function GearShiftKnob() {
         y: y,
         active: false,
       });
-      dispatch(allActions.gear.setGear(portId + 1));
+      if (clutching > 90) {
+        dispatch(allActions.gear.setGear(portId + 1));
+      } else {
+        dispatch(allActions.gear.setGear(0));
+        setPosition({
+          ...position,
+          x: 100,
+          y: 100,
+          active: false,
+        });
+      }
     } else {
       dispatch(allActions.gear.setGear(0));
       setPosition({
