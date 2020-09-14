@@ -1,30 +1,32 @@
 import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import allActions from "../../redux/actions";
 
 function Clutch() {
-  const [clutch, setClutch] = useState(0);
+  const clutching = useSelector((state) => state.clutching);
+  const dispatch = useDispatch();
   const step = 20;
-  const upKey = 90;
-  const downKey = 65;
+  const pushPedalKey = 90;
+  const raisePedalKey = 65;
 
   useEffect(() => {
     const keyFunction = (event) => {
-      if (event.keyCode === downKey) {
-        if (clutch >= step) {
-          setClutch(clutch - step);
+      if (event.keyCode === pushPedalKey) {
+        if (clutching >= 0 && clutching <= 100 - step) {
+          dispatch(allActions.clutching.incrementClutching(step));
         }
       }
-      if (event.keyCode === upKey) {
-        if (clutch <= 100 - step) {
-          setClutch(clutch + step);
+      if (event.keyCode === raisePedalKey) {
+        if (clutching <= 100 && clutching >= 0 + step) {
+          dispatch(allActions.clutching.decrementClutching(step));
         }
       }
     };
-
     document.addEventListener("keydown", keyFunction, false);
     return () => {
       document.removeEventListener("keydown", keyFunction, false);
     };
-  }, [clutch]);
+  }, [clutching]);
 
   return (
     <>
@@ -38,7 +40,7 @@ function Clutch() {
           <g
             id="accelerator"
             transform={`translate(50 50) rotate(${
-              (clutch / 100) * 45
+              (clutching / 100) * 45
             }, 29.755, 9.78)`}
           >
             <g

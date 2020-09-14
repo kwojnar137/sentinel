@@ -1,27 +1,13 @@
-import * as types from "../constants/actionTypes";
+import speed from "./speed";
+import breaking from "./breaking";
+import clutching from "./clutching";
+import gear from "./gear";
 
-export const incrementAcceleration = (step) => {
-  return {
-    type: types.ACCELERATION_INCREMENT,
-    payload: step,
-  };
+const allActions = {
+  speed,
+  breaking,
+  clutching,
+  gear,
 };
 
-export const decrementAcceleration = (step) => {
-  return {
-    type: types.ACCELERATION_DECREMENT,
-    payload: step,
-  };
-};
-
-export const setMaxAccelerationValue = () => {
-  return {
-    type: types.ACCELERATION_HIGHER_THAN_100,
-  };
-};
-
-export const setMinAccelerationValue = () => {
-  return {
-    type: types.ACCELERATION_LOWER_THAN_0,
-  };
-};
+export default allActions;

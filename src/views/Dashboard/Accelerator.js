@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  incrementAcceleration,
-  decrementAcceleration,
-  setMaxAccelerationValue,
-  setMinAccelerationValue,
-} from "../../redux/actions";
+import allActions from "../../redux/actions";
 
 function Accelerator() {
   const acceleration = useSelector((state) => state.acceleration);
@@ -18,12 +13,12 @@ function Accelerator() {
     const keyFunction = (event) => {
       if (event.keyCode === pushPedalKey) {
         if (acceleration >= 0 && acceleration <= 100 - step) {
-          dispatch(incrementAcceleration(step));
+          dispatch(allActions.speed.incrementAcceleration(step));
         }
       }
       if (event.keyCode === raisePedalKey) {
         if (acceleration <= 100 && acceleration >= 0 + step) {
-          dispatch(decrementAcceleration(step));
+          dispatch(allActions.speed.decrementAcceleration(step));
         }
       }
     };
