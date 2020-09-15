@@ -6,7 +6,6 @@ import {
 const initialState = {
   clutching: 0,
 };
-// export const acceleration = (state = initialState.acceleration, action) => {
 
 export const clutching = (state = initialState.clutching, action) => {
   switch (action.type) {

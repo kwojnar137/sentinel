@@ -6,7 +6,6 @@ import {
 const initialState = {
   breaking: 0,
 };
-// export const acceleration = (state = initialState.acceleration, action) => {
 
 export const breaking = (state = initialState.breaking, action) => {
   switch (action.type) {

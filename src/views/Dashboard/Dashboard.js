@@ -18,10 +18,12 @@ const Dashboard = () => {
   const [range, setRange] = useState(230);
   const [temp, setTemp] = useState(20);
   const [fuel, setFuel] = useState(80);
+  // const speed = useSelector((state) => state.speed);
   const acceleration = useSelector((state) => state.acceleration);
   const breaking = useSelector((state) => state.breaking);
   const clutching = useSelector((state) => state.clutching);
   const gear = useSelector((state) => state.gear);
+  const rpm = useSelector((state) => state.rpm);
 
   const date = new Date();
 
@@ -36,7 +38,7 @@ const Dashboard = () => {
         >
           <g transform="translate(4.5 4.5)">
             <Speedometer speed={carSpeed} />
-            <Tachometer engineSpeed={engineSpeed} gear={gear} />
+            <Tachometer engineSpeed={rpm} gear={gear} />
             <InfoArea range={range} date={date} temp={temp} fuel={fuel} />
           </g>
         </svg>

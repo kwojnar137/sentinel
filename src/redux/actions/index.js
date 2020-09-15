@@ -1,13 +1,17 @@
-import speed from "./speed";
+import acceleration from "./acceleration";
 import breaking from "./breaking";
 import clutching from "./clutching";
 import gear from "./gear";
+import speed from "./speed";
+import rpm from "./rpm";
 
 const allActions = {
-  speed,
+  acceleration,
   breaking,
   clutching,
   gear,
+  speed,
+  rpm,
 };
 
 export default allActions;

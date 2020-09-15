@@ -1,20 +1,20 @@
 import * as types from "../constants/actionTypes";
 
-export const incrementAcceleration = (step) => {
+export const incrementSpeed = (delta) => {
   return {
-    type: types.ACCELERATION_INCREMENT,
-    payload: step,
+    type: types.SPEED_INCREMENT,
+    payload: delta,
   };
 };
 
-export const decrementAcceleration = (step) => {
+export const decrementSpeed = (delta) => {
   return {
-    type: types.ACCELERATION_DECREMENT,
-    payload: step,
+    type: types.SPEED_DECREMENT,
+    payload: delta,
   };
 };
 
 export default {
-  incrementAcceleration,
-  decrementAcceleration,
+  incrementSpeed,
+  decrementSpeed,
 };

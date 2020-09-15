@@ -13,12 +13,12 @@ function Accelerator() {
     const keyFunction = (event) => {
       if (event.keyCode === pushPedalKey) {
         if (acceleration >= 0 && acceleration <= 100 - step) {
-          dispatch(allActions.speed.incrementAcceleration(step));
+          dispatch(allActions.acceleration.incrementAcceleration(step));
         }
       }
       if (event.keyCode === raisePedalKey) {
         if (acceleration <= 100 && acceleration >= 0 + step) {
-          dispatch(allActions.speed.decrementAcceleration(step));
+          dispatch(allActions.acceleration.decrementAcceleration(step));
         }
       }
     };

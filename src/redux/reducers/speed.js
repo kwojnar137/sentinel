@@ -1,18 +1,14 @@
-import {
-  ACCELERATION_INCREMENT,
-  ACCELERATION_DECREMENT,
-} from "../constants/actionTypes";
+import { SPEED_INCREMENT, SPEED_DECREMENT } from "../constants/actionTypes";
 
 const initialState = {
-  acceleration: 0,
+  speed: 0,
 };
-// export const acceleration = (state = initialState.acceleration, action) => {
 
-export const acceleration = (state = initialState.acceleration, action) => {
+export const speed = (state = initialState.speed, action) => {
   switch (action.type) {
-    case ACCELERATION_INCREMENT:
+    case SPEED_INCREMENT:
       return state + action.payload;
-    case ACCELERATION_DECREMENT:
+    case SPEED_DECREMENT:
       return state - action.payload;
     default:
       return state;
