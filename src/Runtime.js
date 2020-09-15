@@ -16,43 +16,24 @@ export default function Runtime() {
 
   const h = 100;
 
-  function calcRpm() {
-    // console.log("tu");
-    // console.log(gear);
-  }
-
   useEffect(() => {
     function calcRpm() {
-      if (gear != 0) {
-        // let calcDeltaRPM = ((acceleration / 5 - 10) * 2) / gear;
+      if (gear != 0 && acceleration > 0 && clutching < 90) {
         // let calcDeltaRPM =
-        //   (((acceleration * 5 - 10) * 2) / gear) * (rpm / 8000 - 1);
+        //   ((5 * (acceleration / 5 - 10)) / gear) * -(rpm / 8000 - 1);
 
-        // let calcDeltaRPM = ((acceleration / 5 - 10) / gear) * -(rpm / 8000 - 1);
-        let calcDeltaRPM =
-          ((5 * (acceleration / 5 - 10)) / gear) * -(rpm / 8000 - 1);
-
-        // * (rpm / 8000 - 1) -(rpm / 8000 - 1);
-        console.log(rpm / 8000 - 1);
-
+        let calcDeltaRPM = acceleration - acceleration * (rpm / 8000);
         console.log({ calcDeltaRPM });
-        if (rpm <= 700) {
-          calcDeltaRPM = calcDeltaRPM + 100;
-        }
-
-        if (rpm <= 700) {
-          calcDeltaRPM = calcDeltaRPM + 100;
-        }
-        // if (rpm >= 8000) {
-        //   calcDeltaRPM = 0;
-        // }
         setDeltaRPM(calcDeltaRPM);
+        if (rpm < 700) {
+          setDeltaRPM(700);
+        }
       }
-      // else if (rpm > 700 && acceleration < 10) {
-      //   setDeltaRPM(-10);
-      // } else {
-      //   setDeltaRPM(0);
-      // }
+      if ((gear != 0 && acceleration === 0) || clutching > 90) {
+        let calcDeltaRPM = (-rpm / 160) * (rpm / 700 - 1);
+        setDeltaRPM(calcDeltaRPM);
+        console.log({ calcDeltaRPM });
+      }
       if (deltaRPM > 0) {
         dispatch(allActions.rpm.incrementRpm(deltaRPM));
       } else {
@@ -72,8 +53,8 @@ export default function Runtime() {
   useEffect(() => {}, []);
 
   // console.log({acceleration});
-  console.log({ deltaRPM });
-  console.log({ rpm });
+  // console.log({ deltaRPM });
+  // console.log({ rpm });
 
   return <></>;
 }

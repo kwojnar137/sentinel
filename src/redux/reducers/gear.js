@@ -1,7 +1,7 @@
 import { SET_GEAR } from "../constants/actionTypes";
 
 const initialState = {
-  gear: 0,
+  gear: 1,
 };
 
 export const gear = (state = initialState.gear, action) => {
