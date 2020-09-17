@@ -10,7 +10,7 @@ import Accelerator from "./Accelerator";
 import Break from "./Break";
 import Clutch from "./Clutch";
 import Gearbox from "./Gearbox";
-import Signpost from "./Signpost";
+// import Signpost from "./Signposts";
 import TurnSignalLever from "./TurnSignalLever";
 
 import "./dashboard.scss";
@@ -19,7 +19,7 @@ const Dashboard = () => {
   const [range, setRange] = useState(350);
   const [temp, setTemp] = useState(20);
   const [fuel, setFuel] = useState(50);
-  const [signpostControl, setSignpostControl] = useState(null);
+  // const [signpostControl, setSignpostControl] = useState(null);
 
   const gear = useSelector((state) => state.gear);
   const rpm = useSelector((state) => state.rpm);
@@ -102,19 +102,6 @@ const Dashboard = () => {
           <h2> r - up </h2>
           <h2> f - middle </h2>
           <h2> v - down </h2>
-        </div>
-
-        <div className="controlSignposts">
-          <Signpost
-            direction={"left"}
-            signpostControl={signpostControl}
-            setSignpostControl={setSignpostControl}
-          />
-          <Signpost
-            direction={"right"}
-            signpostControl={signpostControl}
-            setSignpostControl={setSignpostControl}
-          />
         </div>
       </div>
     </Layout>

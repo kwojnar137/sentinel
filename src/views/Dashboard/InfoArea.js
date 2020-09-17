@@ -1,5 +1,5 @@
 import React from "react";
-import Signposts from "./Signposts";
+import Signpost from "./Signpost";
 import { fillHeatBars } from "../../utils";
 import { fillFuelStatusBars } from "../../utils";
 
@@ -21,7 +21,10 @@ function InfoArea({ range, date, temp, fuel }) {
 
   return (
     <>
-      <Signposts />
+      <Signpost direction={"left"} />
+      <Signpost direction={"right"} />
+
+      {/* <Signposts /> */}
 
       {/* Fuel status bars */}
       <rect

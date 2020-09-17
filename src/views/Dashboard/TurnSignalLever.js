@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import allActions from "../../redux/actions";
 
 function TurnSignalLever() {
-  const signpost = useSelector((state) => state.signpost);
+  const signpost = useSelector((state) => state.signpostDirectionFromControl);
   const [position, setPostion] = useState(0);
   const dispatch = useDispatch();
   const downKey = 86;
