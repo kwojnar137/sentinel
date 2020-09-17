@@ -8,6 +8,7 @@ export const SET_GEAR = "SET_GEAR";
 
 export const SPEED_INCREMENT = "SPEED_INCREMENT";
 export const SPEED_DECREMENT = "SPEED_DECREMENT";
+export const SPEED_CORRECT = "SPEED_CORRECT";
 
 export const RPM_INCREMENT = "RPM_INCREMENT";
 export const RPM_DECREMENT = "RPM_DECREMENT";

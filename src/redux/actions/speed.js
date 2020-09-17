@@ -14,7 +14,14 @@ export const decrementSpeed = (delta) => {
   };
 };
 
+export const correctSpeed = () => {
+  return {
+    type: types.SPEED_CORRECT,
+  };
+};
+
 export default {
   incrementSpeed,
   decrementSpeed,
+  correctSpeed,
 };
