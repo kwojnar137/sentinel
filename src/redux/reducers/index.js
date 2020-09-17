@@ -5,6 +5,7 @@ import { clutching } from "./clutching";
 import { gear } from "./gear";
 import { speed } from "./speed";
 import { rpm } from "./rpm";
+import { signposts } from "./signposts";
 
 export default combineReducers({
   acceleration,
@@ -13,4 +14,5 @@ export default combineReducers({
   gear,
   speed,
   rpm,
+  signposts,
 });

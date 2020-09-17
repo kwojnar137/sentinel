@@ -12,3 +12,5 @@ export const SPEED_CORRECT = "SPEED_CORRECT";
 
 export const RPM_INCREMENT = "RPM_INCREMENT";
 export const RPM_DECREMENT = "RPM_DECREMENT";
+
+export const SET_SIGNPOST = "SET_SIGNPOST";

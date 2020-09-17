@@ -11,6 +11,7 @@ import Break from "./Break";
 import Clutch from "./Clutch";
 import Gearbox from "./Gearbox";
 import Signpost from "./Signpost";
+import TurnSignalLever from "./TurnSignalLever";
 
 import "./dashboard.scss";
 
@@ -95,6 +96,14 @@ const Dashboard = () => {
           />
           <h3>Fuel</h3>
         </div>
+        <div className="turnSignalLever">
+          <h2>Turn Signal Lever</h2>
+          <TurnSignalLever />
+          <h2> r - up </h2>
+          <h2> f - middle </h2>
+          <h2> v - down </h2>
+        </div>
+
         <div className="controlSignposts">
           <Signpost
             direction={"left"}

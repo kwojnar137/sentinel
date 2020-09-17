@@ -4,6 +4,7 @@ import clutching from "./clutching";
 import gear from "./gear";
 import speed from "./speed";
 import rpm from "./rpm";
+import signpost from "./signposts";
 
 const allActions = {
   acceleration,
@@ -12,6 +13,7 @@ const allActions = {
   gear,
   speed,
   rpm,
+  signpost,
 };
 
 export default allActions;
