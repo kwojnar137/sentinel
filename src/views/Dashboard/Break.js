@@ -1,21 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import allActions from "../../redux/actions";
 
 function Break() {
-  const [breakPosition, setBreakPosition] = useState(0);
+  const breaking = useSelector((state) => state.breaking);
+  const dispatch = useDispatch();
   const step = 10;
-  const upKey = 88;
-  const downKey = 83;
+  const pushPedalKey = 88;
+  const raisePedalKey = 83;
 
   useEffect(() => {
     const keyFunction = (event) => {
-      if (event.keyCode === downKey) {
-        if (breakPosition >= step) {
-          setBreakPosition(breakPosition - step);
+      if (event.keyCode === pushPedalKey) {
+        if (breaking >= 0 && breaking <= 100 - step) {
+          dispatch(allActions.breaking.incrementBreaking(step));
         }
       }
-      if (event.keyCode === upKey) {
-        if (breakPosition <= 100 - step) {
-          setBreakPosition(breakPosition + step);
+      if (event.keyCode === raisePedalKey) {
+        if (breaking <= 100 && breaking >= 0 + step) {
+          dispatch(allActions.breaking.decrementBreaking(step));
         }
       }
     };
@@ -23,7 +26,7 @@ function Break() {
     return () => {
       document.removeEventListener("keydown", keyFunction, false);
     };
-  }, [breakPosition]);
+  }, [breaking]);
 
   return (
     <>
@@ -37,7 +40,7 @@ function Break() {
           <g
             id="accelerator"
             transform={`translate(50 50) rotate(${
-              (breakPosition / 100) * 45
+              (breaking / 100) * 45
             }, 29.755, 9.78)`}
           >
             <g

@@ -1,21 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import allActions from "../../redux/actions";
 
 function Accelerator() {
-  const [acceleration, setAcceleration] = useState(0);
+  const acceleration = useSelector((state) => state.acceleration);
+  const dispatch = useDispatch();
   const step = 4;
-  const upKey = 67;
-  const downKey = 68;
+  const pushPedalKey = 67;
+  const raisePedalKey = 68;
 
   useEffect(() => {
     const keyFunction = (event) => {
-      if (event.keyCode === downKey) {
-        if (acceleration >= step) {
-          setAcceleration(acceleration - step);
+      if (event.keyCode === pushPedalKey) {
+        if (acceleration >= 0 && acceleration <= 100 - step) {
+          dispatch(allActions.acceleration.incrementAcceleration(step));
         }
       }
-      if (event.keyCode === upKey) {
-        if (acceleration <= 100 - step) {
-          setAcceleration(acceleration + step);
+      if (event.keyCode === raisePedalKey) {
+        if (acceleration <= 100 && acceleration >= 0 + step) {
+          dispatch(allActions.acceleration.decrementAcceleration(step));
         }
       }
     };

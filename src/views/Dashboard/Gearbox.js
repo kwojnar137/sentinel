@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import GearboxPath from "./GearboxPath";
 import GearPort from "./GearPort";
+import { useSelector, useDispatch } from "react-redux";
+import allActions from "../../redux/actions";
 
 function findPort(x, y) {
   const rangeFromPort = 10;
@@ -31,7 +33,10 @@ function between(x, y, xMin, xMax, yMin, yMax, offset) {
   );
 }
 
-function GearShiftKnob({ setGear }) {
+function GearShiftKnob() {
+  const dispatch = useDispatch();
+  const clutching = useSelector((state) => state.clutching);
+
   const [position, setPosition] = useState({
     x: 100,
     y: 100,
@@ -137,9 +142,19 @@ function GearShiftKnob({ setGear }) {
         y: y,
         active: false,
       });
-      setGear(portId + 1);
+      if (clutching > 90) {
+        dispatch(allActions.gear.setGear(portId + 1));
+      } else {
+        dispatch(allActions.gear.setGear(0));
+        setPosition({
+          ...position,
+          x: 100,
+          y: 100,
+          active: false,
+        });
+      }
     } else {
-      setGear(0);
+      dispatch(allActions.gear.setGear(0));
       setPosition({
         ...position,
         x: 100,
@@ -162,7 +177,7 @@ function GearShiftKnob({ setGear }) {
   );
 }
 
-const Gearbox = ({ setGear }) => {
+const Gearbox = () => {
   return (
     <svg
       viewBox="0 0 200 200"
@@ -177,7 +192,7 @@ const Gearbox = ({ setGear }) => {
       <GearPort x={100.5} y={152} active={false} />
       <GearPort x={153.5} y={48} active={false} />
       <GearPort x={153.5} y={152} active={false} />
-      <GearShiftKnob setGear={setGear} />
+      <GearShiftKnob />
     </svg>
   );
 };
