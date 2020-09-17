@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/sentinel/static/css/main.ae066c4d.chunk.css",
-    "main.js": "/sentinel/static/js/main.e45747af.chunk.js",
-    "main.js.map": "/sentinel/static/js/main.e45747af.chunk.js.map",
+    "main.css": "/sentinel/static/css/main.808b5b22.chunk.css",
+    "main.js": "/sentinel/static/js/main.b03a5ffa.chunk.js",
+    "main.js.map": "/sentinel/static/js/main.b03a5ffa.chunk.js.map",
     "runtime-main.js": "/sentinel/static/js/runtime-main.8f648e14.js",
     "runtime-main.js.map": "/sentinel/static/js/runtime-main.8f648e14.js.map",
     "static/js/2.4f25b4e6.chunk.js": "/sentinel/static/js/2.4f25b4e6.chunk.js",
     "static/js/2.4f25b4e6.chunk.js.map": "/sentinel/static/js/2.4f25b4e6.chunk.js.map",
     "index.html": "/sentinel/index.html",
-    "precache-manifest.7851d5831f4775f1fcd8da33c8e5bec7.js": "/sentinel/precache-manifest.7851d5831f4775f1fcd8da33c8e5bec7.js",
+    "precache-manifest.89db70c5b83ff02aeb269098d8457942.js": "/sentinel/precache-manifest.89db70c5b83ff02aeb269098d8457942.js",
     "service-worker.js": "/sentinel/service-worker.js",
-    "static/css/main.ae066c4d.chunk.css.map": "/sentinel/static/css/main.ae066c4d.chunk.css.map",
+    "static/css/main.808b5b22.chunk.css.map": "/sentinel/static/css/main.808b5b22.chunk.css.map",
     "static/js/2.4f25b4e6.chunk.js.LICENSE.txt": "/sentinel/static/js/2.4f25b4e6.chunk.js.LICENSE.txt",
     "static/media/LogoIcon.c9842ff6.svg": "/sentinel/static/media/LogoIcon.c9842ff6.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.8f648e14.js",
     "static/js/2.4f25b4e6.chunk.js",
-    "static/css/main.ae066c4d.chunk.css",
-    "static/js/main.e45747af.chunk.js"
+    "static/css/main.808b5b22.chunk.css",
+    "static/js/main.b03a5ffa.chunk.js"
   ]
 }
