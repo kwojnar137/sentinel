@@ -44,7 +44,6 @@ function TurnSignalLever() {
         <g>
           <g>
             <line
-              // transform="translate(104 100) rotate(-45)"
               transform={transform}
               x2="-90"
               stroke="#707070"
@@ -53,16 +52,6 @@ function TurnSignalLever() {
             />
           </g>
           <circle transform="translate(104 100)" r="16" fill="#000230" />
-
-          {/* <line
-            id="Line_13"
-            y2="22"
-            transform="translate(30.255 17.28)"
-            fill="none"
-            stroke="#707070"
-            strokeLinecap="round"
-            strokeWidth="6"
-          /> */}
         </g>
       </svg>
     </div>
