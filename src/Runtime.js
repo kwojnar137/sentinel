@@ -23,8 +23,7 @@ export default function Runtime() {
         dispatch(allActions.speed.correctSpeed());
       }
       if (deltaRPM > 0 && gear !== 0 && speed >= 0) {
-        let calcDeltaSpeed =
-          (deltaRPM / 100) * (1 - 1 * (speed / (gear * gear * 20)));
+        let calcDeltaSpeed = (deltaRPM / 80) * (1 - 1 * (speed / (gear * 40)));
         calcDeltaSpeed = calcDeltaSpeed - breaking / 100;
         if (calcDeltaSpeed < 0) {
           let calcDeltaRPM = acceleration - acceleration * (rpm / 8000);
@@ -42,7 +41,7 @@ export default function Runtime() {
     function calcRpm() {
       if (gear !== 0 && acceleration > 0 && clutching < 90) {
         let calcDeltaRPM = acceleration - acceleration * (rpm / 8000);
-        calcDeltaRPM = (calcDeltaRPM * 1) / gear;
+        calcDeltaRPM = (calcDeltaRPM * 2) / gear;
         setDeltaRPM(calcDeltaRPM);
         if (rpm < 700) {
           setDeltaRPM(700);
