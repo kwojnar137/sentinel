@@ -1,31 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import Layout from "../../Layout/Layout";
 import Speedometer from "./Speedometer";
 import Tachometer from "./Tachometer";
 import InfoArea from "./InfoArea";
+import VerticalSlider from "../../components/VerticalSlider";
 
 import Accelerator from "./Accelerator";
 import Break from "./Break";
 import Clutch from "./Clutch";
-
 import Gearbox from "./Gearbox";
+import Signpost from "./Signpost";
+
 import "./dashboard.scss";
 
-import VerticalSlider from "../../components/VerticalSlider";
-
 const Dashboard = () => {
-  const [carSpeed, setCarSpeed] = useState(0);
-  const [engineSpeed, setEngineSpeed] = useState(0);
-  const [range, setRange] = useState(230);
+  const [range, setRange] = useState(350);
   const [temp, setTemp] = useState(20);
-  const [fuel, setFuel] = useState(80);
+  const [fuel, setFuel] = useState(50);
+  const [signpostControl, setSignpostControl] = useState(null);
 
   const gear = useSelector((state) => state.gear);
   const rpm = useSelector((state) => state.rpm);
   const speed = useSelector((state) => state.speed);
+  const maxTankCapacity = 700;
 
   const date = new Date();
+
+  useEffect(() => {
+    const newRange = (fuel / 100) * maxTankCapacity;
+    setRange(parseInt(newRange));
+  }, [fuel]);
 
   return (
     <Layout>
@@ -89,6 +94,18 @@ const Dashboard = () => {
             onChange={(e) => setFuel(e.target.value)}
           />
           <h3>Fuel</h3>
+        </div>
+        <div className="controlSignposts">
+          <Signpost
+            direction={"left"}
+            signpostControl={signpostControl}
+            setSignpostControl={setSignpostControl}
+          />
+          <Signpost
+            direction={"right"}
+            signpostControl={signpostControl}
+            setSignpostControl={setSignpostControl}
+          />
         </div>
       </div>
     </Layout>
